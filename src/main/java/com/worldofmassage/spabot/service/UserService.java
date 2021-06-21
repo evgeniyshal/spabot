@@ -10,14 +10,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder encoder;
@@ -29,6 +28,21 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User Not Found");
         }
         return user;
+    }
+
+    public boolean add(User user, String... authorities){
+        User userFromDb = userRepository.findByUsername(user.getUsername());
+        if (userFromDb != null){
+            return false;
+        }
+        user.setRoles(new HashSet<>(roleRepository.findByAuthorityIn(Arrays.asList(authorities))));
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return true;
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Autowired
