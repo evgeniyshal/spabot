@@ -26,6 +26,10 @@ public class RoleService {
         return roleRepository.findByAuthorityIn(Arrays.asList(authorities));
     }
 
+    public boolean roleExists(String authority) {
+        return roleRepository.existsByAuthority(authority);
+    }
+
     public void add(Role role) {
         roleRepository.save(role);
     }

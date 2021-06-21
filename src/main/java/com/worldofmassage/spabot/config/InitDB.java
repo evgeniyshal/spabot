@@ -40,19 +40,12 @@ public class InitDB {
         }
 
         if (!adminExists()) {
-            addDefaultUser();
+            addAdmin();
         }
     }
 
-    private boolean adminExists() {
-        return userService.findAll().stream()
-                .anyMatch(user -> user.getAuthorities().stream()
-                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN")));
-    }
-
     private boolean adminRoleExists() {
-        return roleService.findAll().stream()
-                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+        return roleService.roleExists("ROLE_ADMIN");
     }
 
     private void addAdminRole() {
@@ -62,8 +55,7 @@ public class InitDB {
     }
 
     private boolean userRoleExists() {
-        return roleService.findAll().stream()
-                .anyMatch(role -> role.getAuthority().equals("ROLE_USER"));
+        return roleService.roleExists("ROLE_USER");
     }
 
     private void addUserRole() {
@@ -72,7 +64,13 @@ public class InitDB {
         roleService.add(role);
     }
 
-    private void addDefaultUser() {
+    private boolean adminExists() {
+        return userService.findAll().stream()
+                .anyMatch(user -> user.getAuthorities().stream()
+                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN")));
+    }
+
+    private void addAdmin() {
         User defaultUser = new User();
         defaultUser.setUsername("admin");
         defaultUser.setPassword("admin");

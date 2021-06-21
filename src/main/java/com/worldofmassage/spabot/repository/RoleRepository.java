@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     List<Role> findByAuthorityIn(List<String> authorities);
+    boolean existsByAuthority(String authority);
 }
