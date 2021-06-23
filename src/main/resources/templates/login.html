@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="base :: head(~{::title})">
+    <title>Вход</title>
+</head>
+<body>
+<section th:insert="index::header"></section>
+
+<div class="container">
+    <h3>Авторизация</h3>
+    <form method="post" th:action="@{/login}" >
+        <div class="form-group">
+            <label for="username">Введите логин</label>
+            <input name="username" type="text" class="form-control" id="username" placeholder="Введите логин">
+        </div>
+        <div class="form-group">
+            <label for="password">Введите пароль</label>
+            <input name="password" type="password" class="form-control" id="password" placeholder="Введите пароль">
+        </div>
+        <button class="btn btn-primary" type="submit">Войти</button>
+        <h4><a href="/registration">Регистрация</a></h4>
+    </form>
+</div>
+
+</body>
+</html>

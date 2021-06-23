@@ -1,20 +1,31 @@
 package com.worldofmassage.spabot.config.botconfig;
 
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@Data
-@PropertySource("classpath:application.properties")
+@ConfigurationProperties(prefix = "bot.config")
 public class BotConfig {
-
-
-    @Value("${WorldOfMassage_bot}")
     String botUserName;
-
-
-    @Value("${1872997526:AAEIe18H78KX3S7Qse7TVqxxXARkX4E8JGc}")
     String token;
+
+    public BotConfig() {
+
+    }
+
+    public String getBotUserName() {
+        return botUserName;
+    }
+
+    public void setBotUserName(String botUserName) {
+        this.botUserName = botUserName;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
