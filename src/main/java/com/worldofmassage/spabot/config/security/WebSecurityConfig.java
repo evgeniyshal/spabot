@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/foruser/**").hasRole("USER")
                 // доступно только пользователям с ролью ROLE_ADMIN
                 .antMatchers("/foruser/**").hasRole("ADMIN")
-                .antMatchers("/").permitAll()
+                .antMatchers("/").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // /logout
                 .logout().permitAll()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login");
 
     }
 
