@@ -12,7 +12,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -22,9 +22,9 @@
                         <a class="dropdown-item" href="/articles/show">Услуги</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" sec:authorize="isAnonymous()" href="/login">Войти</a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" sec:authorize="isAnonymous()" href="/login">Войти</a>-->
+<!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">Выйти</a>
                 </li>
