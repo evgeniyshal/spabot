@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Component
 public class InitDB {
@@ -65,9 +66,7 @@ public class InitDB {
     }
 
     private boolean adminExists() {
-        return userService.findAll().stream()
-                .anyMatch(user -> user.getAuthorities().stream()
-                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN")));
+        return !userService.findBySpecificRoles("ROLE_ADMIN").isEmpty();
     }
 
     private void addAdmin() {

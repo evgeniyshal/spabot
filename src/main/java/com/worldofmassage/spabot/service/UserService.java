@@ -45,6 +45,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
+    public List<User> findBySpecificRoles(String... roles) {
+        return userRepository.findBySpecificRoles(roles);
+    }
+
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
