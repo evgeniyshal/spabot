@@ -30,7 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration").not().fullyAuthenticated()
                 // доступно только пользователям с ролью ROLE_USER
                 .antMatchers("/foruser/**").hasRole("USER")
                 // доступно только пользователям с ролью ROLE_ADMIN

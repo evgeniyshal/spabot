@@ -6,3 +6,7 @@ img {
 header {
     margin-bottom: 20px;
 }
+
+.error {
+    color: red;
+}

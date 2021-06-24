@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="base :: head(~{::title})">
+    <title>Новости</title>
+</head>
+<body>
+<th:block th:insert="index::header"></th:block>
+<div class="container">
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Время сеанса в минутах</th>
+            <th scope="col">Цена</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="offer, state : ${offers}">
+            <th scope="row" th:utext="${state.count}"></th>
+            <td th:utext="${offer.title}"></td>
+            <td th:utext="${offer.description}"></td>
+            <td th:utext="${offer.duration}"></td>
+            <td th:utext="${offer.price}"></td>
+            <td>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="btn btn-primary" th:href="@{/offer/edit}">Изменить</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
