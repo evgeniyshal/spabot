@@ -29,7 +29,7 @@
             <td th:utext="${offer.price}"></td>
             <td>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="btn btn-primary" th:href="@{/offer/edit}">Изменить</a>
+                    <a class="btn btn-primary" th:href="@{/offers/update(id=${offer.id})}">Изменить</a>
                 </div>
             </td>
         </tr>
