@@ -17,8 +17,11 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model, @RequestParam(value = "error", required = false) boolean error) {
+    public String loginForm(Model model,
+                            @RequestParam(value = "error", required = false) boolean error,
+                            @RequestParam(value = "logout", required = false) boolean logout) {
         model.addAttribute("error", error);
+        model.addAttribute("logout", logout);
         return "login";
     }
 }

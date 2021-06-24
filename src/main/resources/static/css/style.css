@@ -10,3 +10,7 @@ header {
 .error {
     color: red;
 }
+
+.text-success {
+    color: green;
+}

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/offers")
 public class OfferController {
 
-    private OfferRepository offerRepository;
+    private final OfferRepository offerRepository;
 
     @Autowired
     public OfferController(OfferRepository offerRepository) {
