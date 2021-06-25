@@ -1,39 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: head(~{::title})">
-    <title>Страница</title>
-
+    <title>Главная страница</title>
 </head>
 <body>
-<header th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Spa Bot</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Просмотр информации
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/offers/show">Услуги</a>
-                    </div>
-                </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" sec:authorize="isAnonymous()" href="/login">Войти</a>-->
-<!--                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">Выйти</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+<section th:insert="navbar::header"></section>
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">Добро пожаловать</h1>
