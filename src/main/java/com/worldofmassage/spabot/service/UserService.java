@@ -4,6 +4,7 @@ import com.worldofmassage.spabot.entity.User;
 import com.worldofmassage.spabot.repository.RoleRepository;
 import com.worldofmassage.spabot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,6 +48,13 @@ public class UserService implements UserDetailsService {
 
     public List<User> findBySpecificRoles(String... roles) {
         return userRepository.findBySpecificRoles(roles);
+    }
+
+    public User getCurrentUser() {
+        return (User) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 
     @Autowired

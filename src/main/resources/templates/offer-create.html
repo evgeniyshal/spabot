@@ -26,7 +26,8 @@
             <label for="price">Цена</label>
             <input th:field="*{price}" type="number" min="1" class="form-control" id="price" placeholder="Введите цену">
         </div>
-        <button type="submit" class="btn btn-primary">Добавить</button>
+        <button type="submit" class="btn btn-primary btn-block">Добавить</button>
+        <a class="btn btn-secondary btn-block" th:href="@{/offers/show}">Отмена</a>
     </form>
 </div>
 </body>

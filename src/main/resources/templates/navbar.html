@@ -13,16 +13,27 @@
         <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarInfo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Просмотр информации
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarInfo">
                         <a class="dropdown-item" href="/offers/show">Услуги</a>
                     </div>
                 </li>
                 <!--                <li class="nav-item">-->
                 <!--                    <a class="nav-link" sec:authorize="isAnonymous()" href="/login">Войти</a>-->
                 <!--                </li>-->
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarSettings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Настройки
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarSettings">
+                        <a class="dropdown-item" href="/profile">Учетная запись</a>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="navbarSettings">
+                        <a class="dropdown-item" href="/users">Список пользователей</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">Выйти</a>
                 </li>

@@ -24,4 +24,10 @@ public class UserController {
         model.addAttribute("logout", logout);
         return "login";
     }
+
+    @GetMapping("/profile")
+    public String profile(Model model) {
+      model.addAttribute("user", userService.getCurrentUser());
+      return "profile";
+    }
 }
