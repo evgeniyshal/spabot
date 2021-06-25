@@ -8,11 +8,8 @@
 <section th:insert="index::header"></section>
 
 <div class="container">
-    <h3>Изменение услуги</h3>
-    <form th:fragment="offer" method="post" th:action="@{/offers/update}" th:object="${offer}">
-        <div class="form-group">
-            <input th:field="*{id}" type="hidden" class="form-control" id="id">
-        </div>
+    <h3>Добавление услуги</h3>
+    <form th:fragment="offer" method="post" th:action="@{/offers/create}" th:object="${offer}">
         <div class="form-group">
             <label for="title">Название</label>
             <input th:field="*{title}" type="text" min="3" class="form-control" id="title" placeholder="Введите название">
@@ -29,7 +26,7 @@
             <label for="price">Цена</label>
             <input th:field="*{price}" type="number" min="1" class="form-control" id="price" placeholder="Введите цену">
         </div>
-        <button type="submit" class="btn btn-primary">Изменить</button>
+        <button type="submit" class="btn btn-primary">Добавить</button>
     </form>
 </div>
 </body>

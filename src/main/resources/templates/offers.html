@@ -8,7 +8,9 @@
 <body>
 <th:block th:insert="index::header"></th:block>
 <div class="container">
-
+    <p><a class="btn btn-outline-secondary btn-lg btn-block" href="/offers/create">Добавить услугу</a></p>
+</div>
+<div class="container">
     <table class="table">
         <thead class="thead-light">
         <tr>
@@ -17,6 +19,7 @@
             <th scope="col">Описание</th>
             <th scope="col">Время сеанса в минутах</th>
             <th scope="col">Цена</th>
+            <th scope="col"></th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -30,6 +33,11 @@
             <td>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-primary" th:href="@{/offers/update(id=${offer.id})}">Изменить</a>
+                </div>
+            </td>
+            <td>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="btn btn-danger" th:href="@{/offers/delete(id=${offer.id})}">Удалить</a>
                 </div>
             </td>
         </tr>

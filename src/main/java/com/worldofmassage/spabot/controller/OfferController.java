@@ -27,6 +27,18 @@ public class OfferController {
         return "offers";
     }
 
+    @GetMapping("/create")
+    public String createUserForm(Model model) {
+        model.addAttribute("offer", new Offer());
+        return "offer-create";
+    }
+
+    @PostMapping("/create")
+    public String createUser(Offer offer) {
+        offerRepository.save(offer);
+        return "redirect:/offers/show";
+    }
+
     @GetMapping("/update")
     public String updateOfferForm(@RequestParam(value = "id") int id, Model model) {
         Offer offer = offerRepository.findById(id);
@@ -37,6 +49,12 @@ public class OfferController {
     @PostMapping("/update")
     public String updateOffer(Offer offer) {
         offerRepository.save(offer);
+        return "redirect:/offers/show";
+    }
+
+    @GetMapping("/delete")
+    public String deleteOffer(@RequestParam(value = "id") int id) {
+        offerRepository.deleteById(id);
         return "redirect:/offers/show";
     }
 }
