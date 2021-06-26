@@ -20,6 +20,10 @@ public class User implements UserDetails {
     private String username;
     @Size(min = 3, message = "Минимум 3 символа")
     private String password;
+    @Size(min = 3, message = "Минимум 3 символа")
+    private String firstName;
+    @Size(min = 3, message = "Минимум 3 символа")
+    private String lastName;
     @Transient
     private String passwordConfirm;
 
@@ -56,6 +60,22 @@ public class User implements UserDetails {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean containsRoleByAuthority (String authority) {

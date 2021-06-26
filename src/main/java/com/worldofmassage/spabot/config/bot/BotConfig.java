@@ -9,52 +9,52 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.logging.Level;
 
-//@Configuration
-//@ConfigurationProperties(prefix = "bot.config")
-//public class BotConfig extends TelegramLongPollingBot {
-//    String botUserName;
-//    String token;
-//
-//    public BotConfig() {
-//
-//    }
-//
-//    public void setBotUserName(String botUserName) {
-//        this.botUserName = botUserName;
-//    }
-//
-//    public void setToken(String token) {
-//        this.token = token;
-//    }
-//
-//    @Override
-//    public String getBotUsername() {
-//        return botUserName;
-//    }
-//
-//    @Override
-//    public String getBotToken() {
-//        return token;
-//    }
-//
-//    @Override
-//    public void onUpdateReceived(Update update) {
-//
-//    }
-//    @Override
-//    public void onUpdateReceived(Update update) {
-//        String message = update.getMessage().getText();
-//        sendMsg(update.getMessage().getChatId().toString(), message);
-//    }
-//    public synchronized void sendMsg(String chatId, String s) {
-//        SendMessage sendMessage = new SendMessage();
-//        sendMessage.enableMarkdown(true);
-//        sendMessage.setChatId(chatId);
-//        sendMessage.setText(s);
-//        try {
-//            sendMessage(sendMessage);
-//        } catch (TelegramApiException e) {
-//            log.log(Level.SEVERE, "Exception: ", e.toString());
-//        }
-//    }
-//}
+@Configuration
+@ConfigurationProperties(prefix = "bot.config")
+public class BotConfig extends TelegramLongPollingBot {
+    String botUserName;
+    String token;
+
+    public BotConfig() {
+
+    }
+
+    public void setBotUserName(String botUserName) {
+        this.botUserName = botUserName;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public String getBotUsername() {
+        return botUserName;
+    }
+
+    @Override
+    public String getBotToken() {
+        return token;
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+
+    }
+    @Override
+    public void onUpdateReceived(Update update) {
+        String message = update.getMessage().getText();
+        sendMsg(update.getMessage().getChatId().toString(), message);
+    }
+    public synchronized void sendMsg(String chatId, String s) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.enableMarkdown(true);
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(s);
+        try {
+            sendMessage(sendMessage);
+        } catch (TelegramApiException e) {
+            log.log(Level.SEVERE, "Exception: ", e.toString());
+        }
+    }
+}
