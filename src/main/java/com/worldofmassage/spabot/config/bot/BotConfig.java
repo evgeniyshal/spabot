@@ -37,10 +37,7 @@ public class BotConfig extends TelegramLongPollingBot {
         return token;
     }
 
-    @Override
-    public void onUpdateReceived(Update update) {
 
-    }
     @Override
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
@@ -51,10 +48,5 @@ public class BotConfig extends TelegramLongPollingBot {
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
         sendMessage.setText(s);
-        try {
-            sendMessage(sendMessage);
-        } catch (TelegramApiException e) {
-            log.log(Level.SEVERE, "Exception: ", e.toString());
-        }
     }
 }
