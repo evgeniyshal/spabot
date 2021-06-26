@@ -46,12 +46,20 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public boolean containsRoleByAuthority (String authority) {
+        return roles.stream().anyMatch(role -> role.getAuthority().equals(authority));
     }
 
     @Override

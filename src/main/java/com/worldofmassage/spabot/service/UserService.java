@@ -28,7 +28,6 @@ public class UserService implements UserDetailsService {
         if (user == null){
             throw new UsernameNotFoundException("User Not Found");
         }
-
         return user;
     }
 
@@ -72,5 +71,4 @@ public class UserService implements UserDetailsService {
     public void setEncoder(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;
     }
-
 }
