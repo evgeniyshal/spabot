@@ -7,16 +7,14 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.Scanner;
-import java.util.logging.Level;
 
 @Configuration
 @ConfigurationProperties(prefix = "bot.config")
+
 public class BotConfig extends TelegramLongPollingBot {
     String botUserName;
     String token;
-    Scanner scanner = new Scanner(System.in);
-    String s = scanner.nextLine();
+
     public BotConfig() {
     }
 
@@ -37,19 +35,22 @@ public class BotConfig extends TelegramLongPollingBot {
     public String getBotToken() {
         return token;
     }
-    @Override
-    public void onUpdateReceived(Update update) {
-        update.getUpdateId();
-        SendMessage sendMessage = new SendMessage().setChatId(update.getMessage().getChatId());
-        if (update.getMessage().equals(scanner.nextLine()));
-            sendMessage.setText("Здравствуйте, я бот...");
-        try {
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
-            System.out.println("Сообщение не отправлено");
-        }
 
+    @Override
+
+    public void onUpdateReceived(Update update) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            SendMessage message = new SendMessage();
+            message.setText(update.getMessage().getText());
+
+            try {
+                execute(message);
+            } catch (TelegramApiException e) {
+                System.out.println("Сообщение не отправлено");
+            }
+        }
     }
 }
+
 
 
