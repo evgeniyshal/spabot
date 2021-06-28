@@ -32,15 +32,10 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public boolean add(User user, String... authorities){
-        User userFromDb = userRepository.findByUsername(user.getUsername());
-        if (userFromDb != null){
-            return false;
-        }
+    public void add(User user, String... authorities){
         user.setRoles(new HashSet<>(roleRepository.findByAuthorityIn(Arrays.asList(authorities))));
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
-        return true;
     }
 
     public List<User> findAll() {

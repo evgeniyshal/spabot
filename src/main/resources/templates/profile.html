@@ -7,7 +7,7 @@
 <body>
 <section th:insert="navbar::header"></section>
 
-<div class="container" th:object="${user}">
+<form th:fragment="user" method="post" th:action="@{/user-update}" th:object="${user}">
     <div class="main-body">
         <div class="row gutters-sm">
             <div class="col-md-3 mb-3">
@@ -36,12 +36,12 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Фамилия</h6>
                             </div>
-                            <div class="col-sm-7 text-secondary" th:text="${user.lastName}"></div>
+                            <div class="col-sm-7 text-secondary" th:text="*{lastName}"></div>
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" th:attr="data-target='#modal-surname-update'+${user.lastName}">Изменить</button>
                             </div>
                             <!-- Modal -->
-                            <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true" th:id="modal-update+${user.lastName}">
+                            <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true" th:id="modal-surname-update+${user.lastName}">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -54,11 +54,16 @@
                                             <form>
                                                 <div class="form-group">
                                                     <label for="lastName" class="col-form-label">Фамилия</label>
-                                                    <input th:field="*{lastName}" type="text" min="3" class="form-control" id="lastName" placeholder="Введите название">
+                                                    <input th:field="*{id}" type="hidden" class="form-control">
+                                                    <input th:field="*{firstName}" type="hidden" class="form-control">
+                                                    <input th:field="*{lastName}" type="text" min="3" class="form-control" id="lastName" placeholder="Введите фамилию">
+                                                    <input th:field="*{username}" type="hidden" class="form-control">
+                                                    <input th:field="*{password}" type="hidden" class="form-control">
+                                                    <input th:field="${user.authorities}" type="hidden" class="form-control">
                                                 </div>
                                             </form>
                                         <div class="modal-footer">
-                                            <a class="btn btn-danger" method="post" th:action="@{/user-update}" th:object="${user}">Удалить</a>
+                                            <button type="submit" class="btn btn-primary">Сохранить</button>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                                         </div>
                                     </div>
@@ -78,7 +83,7 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Пароль</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary" th:text="'*****'"></div>
+                            <div class="col-sm-9 text-secondary" th:text="${user.password}"></div>
                         </div>
                         <hr>
                         <div class="row">
@@ -97,6 +102,6 @@
         </div>
 
     </div>
-</div>
+</form>
 </body>
 </html>

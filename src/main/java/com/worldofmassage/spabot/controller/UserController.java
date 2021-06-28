@@ -1,5 +1,6 @@
 package com.worldofmassage.spabot.controller;
 
+import com.worldofmassage.spabot.entity.Offer;
 import com.worldofmassage.spabot.entity.User;
 import com.worldofmassage.spabot.service.RoleService;
 import com.worldofmassage.spabot.service.UserService;
@@ -42,5 +43,15 @@ public class UserController {
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", user);
         return "user-update";
+    }
+
+    @PostMapping("/user-update")
+    public String updateOffer(User user) {
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        System.out.println(user.getFirstName());
+        System.out.println(user.getLastName());
+        userService.add(user);
+        return "redirect:/profile";
     }
 }
