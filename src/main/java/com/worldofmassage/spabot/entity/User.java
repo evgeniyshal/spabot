@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
@@ -18,6 +19,7 @@ public class User implements UserDetails {
 
     @Size(min = 2, message = "Минимум 2 символа")
     private String username;
+    @NotBlank
     @Size(min = 3, message = "Минимум 3 символа")
     private String password;
     @Size(min = 3, message = "Минимум 3 символа")
