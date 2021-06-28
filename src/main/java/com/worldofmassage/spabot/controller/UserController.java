@@ -7,9 +7,12 @@ import com.worldofmassage.spabot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -40,18 +43,26 @@ public class UserController {
     @GetMapping("/user-update")
     public String updateUserForm(@RequestParam(value = "id") int id, Model model) {
         User user = userService.findById(id);
-        model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", user);
         return "user-update";
     }
 
     @PostMapping("/user-update")
-    public String updateOffer(User user) {
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
-        userService.add(user);
+    public String updateUser(@Valid User user,
+                              @RequestParam(value = "authorities") String[] authorities,
+                              BindingResult bindingResult,
+                              Model model){
+        if (bindingResult.hasErrors()) {
+            return "user-update";
+        }
+
+        if (!user.getPassword().equals(user.getPasswordConfirm())){
+            model.addAttribute("confirmError", "Пароли не совпадают");
+            return "user-update";
+        }
+
+        userService.save(user, authorities);
+
         return "redirect:/profile";
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoleService {
@@ -22,7 +23,7 @@ public class RoleService {
         return roleRepository.findAll();
     }
 
-    public List<Role> findByAuthorityIn(String... authorities) {
+    public Set<Role> findByAuthorityIn(String... authorities) {
         return roleRepository.findByAuthorityIn(Arrays.asList(authorities));
     }
 

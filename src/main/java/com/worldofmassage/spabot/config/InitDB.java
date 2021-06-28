@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @Component
 public class InitDB {
@@ -73,6 +72,8 @@ public class InitDB {
         User defaultUser = new User();
         defaultUser.setUsername("admin");
         defaultUser.setPassword("admin");
-        userService.add(defaultUser, "ROLE_ADMIN");
+        defaultUser.setFirstName("Admin");
+        defaultUser.setLastName("Admin");
+        userService.save(defaultUser, "ROLE_ADMIN");
     }
 }
