@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -55,6 +56,15 @@ public class UserService implements UserDetailsService {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
+    }
+
+    public User findById(int id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isEmpty()) {
+            throw new UsernameNotFoundException("User Not Found");
+        } else {
+            return userOptional.get();
+        }
     }
 
     @Autowired
