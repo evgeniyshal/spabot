@@ -9,13 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
 
 @Controller
-public class UserController implements WebMvcConfigurer {
+@RequestMapping(value = "/users")
+public class UserController {
   private final UserService userService;
   private final RoleService roleService;
 
@@ -25,26 +26,31 @@ public class UserController implements WebMvcConfigurer {
       this.roleService = roleService;
     }
 
-    @GetMapping("/login")
-    public String loginForm(Model model,
-                            @RequestParam(value = "error", required = false) boolean error,
-                            @RequestParam(value = "logout", required = false) boolean logout) {
-        model.addAttribute("error", error);
-        model.addAttribute("logout", logout);
-        return "login";
+    @GetMapping(value = "/show")
+    public String showData(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "users";
     }
 
-    @GetMapping("/profile")
-    public String profile(Model model) {
-      model.addAttribute("user", userService.getCurrentUser());
-      return "profile";
-    }
+//    @GetMapping("/user-create")
+//    public String createUserForm(Model model) {
+//        model.addAttribute("roles", roleService.findAll());
+//        model.addAttribute("user", new User());
+//        return "user-create";
+//    }
+//
+//    @PostMapping("/user-create")
+//    public String createUser(User user,
+//                             @RequestParam(value = "authorities") String[] authorities) {
+//        userService.save(user, authorities);
+//        return "redirect:/";
+//    }
 
     @GetMapping("/user-update")
     public String updateUserForm(@RequestParam(value = "id") int id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "user-update";
+        return "profile-update";
     }
 
     @PostMapping("/user-update")
@@ -53,17 +59,17 @@ public class UserController implements WebMvcConfigurer {
                               Model model,
                               @RequestParam(value = "authorities") String[] authorities){
         if (bindingResult.hasErrors()) {
-            return "user-update";
+            return "profile-update";
         }
 
         if (!user.getPassword().equals(user.getPasswordConfirm())){
             model.addAttribute("confirmError", "Пароли не совпадают");
-            return "user-update";
+            return "profile-update";
         }
 
         if (!userService.save(user, authorities)){
             model.addAttribute("usernameError", "Пользователь с данным логином уже существует");
-            return "user-update";
+            return "profile-update";
         }
 
         return "redirect:/";

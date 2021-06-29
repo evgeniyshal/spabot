@@ -20,17 +20,12 @@
                         <a class="dropdown-item" href="/offers/show">Услуги</a>
                     </div>
                 </li>
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" sec:authorize="isAnonymous()" href="/login">Войти</a>-->
-                <!--                </li>-->
                 <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarSettings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Настройки
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarSettings">
                         <a class="dropdown-item" href="/profile">Учетная запись</a>
-                    </div>
-                    <div class="dropdown-menu" aria-labelledby="navbarSettings">
                         <a class="dropdown-item" href="/users">Список пользователей</a>
                     </div>
                 </li>

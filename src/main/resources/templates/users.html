@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="base :: head(~{::title})">
+    <title>Пользователи</title>
+</head>
+<body>
+<section th:insert="navbar::header"></section>
+<div class="container">
+    <p><a class="btn btn-outline-secondary btn-lg btn-block" href="/offers/create">Добавить пользователя</a></p>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Роль</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, state : ${users}">
+            <th scope="row" th:utext="${state.count}"></th>
+            <td th:utext="${user.firstName}"></td>
+            <td th:utext="${user.lastName}"></td>
+            <td th:utext="${user.username}"></td>
+            <td th:if="${user.containsRoleByAuthority('ROLE_ADMIN')}" class="col-sm-9 text-secondary" th:text="'Администратор'"></td>
+            <td th:if="${user.containsRoleByAuthority('ROLE_USER')}" class="col-sm-9 text-secondary" th:text="'Пользователь'"></td>
+            <td>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="btn btn-primary" th:href="@{/users/update(id=${user.id})}">Изменить</a>
+                </div>
+            </td>
+            <td>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#modal-delete'+${user.id}">Удалить</button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true" th:id="modal-delete+${user.id}">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLongTitle">Удаление пользователя</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Вы действительно хотите удалить данного пользователя?
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-danger" th:href="@{/users/delete(id=${user.id})}">Удалить</a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script  th:src="@{/js/modal.js}"></script>
+</body>
+</html>

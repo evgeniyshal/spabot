@@ -8,7 +8,7 @@
 <section th:insert="navbar::header"></section>
 
 <div class="container">
-    <form action="#" method="post" th:action="@{/user-update}" th:object="${user}">
+    <form action="#" method="post" th:action="@{/profile/update}" th:object="${user}">
         <input th:field="*{id}" type="hidden" class="form-control" id="id">
         <div class="form-group">
             <label for="username">Введите имя</label>
@@ -47,7 +47,7 @@
         <p th:if="${usernameError}" th:utext="${usernameError}" class="error"></p>
         <div>
             <input type="submit" class="btn btn-primary" value="Сохранить">
-            <a class="btn btn-secondary" th:href="@{/}">Отмена</a>
+            <a class="btn btn-secondary" th:href="@{/profile/show}">Отмена</a>
         </div>
     </form>
 </div>

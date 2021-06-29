@@ -28,13 +28,13 @@ public class OfferController {
     }
 
     @GetMapping("/create")
-    public String createUserForm(Model model) {
+    public String createOfferForm(Model model) {
         model.addAttribute("offer", new Offer());
         return "offer-create";
     }
 
     @PostMapping("/create")
-    public String createUser(Offer offer) {
+    public String createOffer(Offer offer) {
         offerRepository.save(offer);
         return "redirect:/offers/show";
     }
