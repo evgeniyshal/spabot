@@ -19,7 +19,6 @@ public class User implements UserDetails {
 
     @Size(min = 2, message = "Минимум 2 символа")
     private String username;
-    @NotBlank
     @Size(min = 3, message = "Минимум 3 символа")
     private String password;
     @Size(min = 3, message = "Минимум 3 символа")

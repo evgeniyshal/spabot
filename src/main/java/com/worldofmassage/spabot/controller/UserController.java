@@ -1,6 +1,5 @@
 package com.worldofmassage.spabot.controller;
 
-import com.worldofmassage.spabot.entity.Offer;
 import com.worldofmassage.spabot.entity.User;
 import com.worldofmassage.spabot.service.RoleService;
 import com.worldofmassage.spabot.service.UserService;
@@ -9,14 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
 
 @Controller
-public class UserController {
+public class UserController implements WebMvcConfigurer {
   private final UserService userService;
   private final RoleService roleService;
 
@@ -50,10 +49,9 @@ public class UserController {
 
     @PostMapping("/user-update")
     public String updateUser(@Valid User user,
-                              @RequestParam(value = "authorities") String[] authorities,
                               BindingResult bindingResult,
-                              Model model){
-
+                              Model model,
+                              @RequestParam(value = "authorities") String[] authorities){
         if (bindingResult.hasErrors()) {
             return "user-update";
         }
@@ -63,7 +61,7 @@ public class UserController {
             return "user-update";
         }
 
-        userService.save(user, authorities);
+        userService.updateCurrentUser(user, authorities);
 
         return "redirect:/profile";
     }

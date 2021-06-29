@@ -36,7 +36,12 @@ public class UserService implements UserDetailsService {
     public void save(User user, String... authorities){
         user.setRoles(roleRepository.findByAuthorityIn(Arrays.asList(authorities)));
         user.setPassword(encoder.encode(user.getPassword()));
-        updateLoggedUser(user);
+        userRepository.save(user);
+    }
+
+    public void updateCurrentUser(User user, String... authorities){
+        user.setRoles(roleRepository.findByAuthorityIn(Arrays.asList(authorities)));
+        user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -49,10 +54,11 @@ public class UserService implements UserDetailsService {
     }
 
     public User getCurrentUser() {
-        return (User) SecurityContextHolder
+        User loggedUser = (User) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
+        return findById(loggedUser.getId());
     }
 
     public User findById(int id) {
@@ -62,11 +68,6 @@ public class UserService implements UserDetailsService {
         } else {
             return userOptional.get();
         }
-    }
-
-    public void updateLoggedUser(User user) {
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @Autowired
