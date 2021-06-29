@@ -18,7 +18,7 @@ public class User implements UserDetails {
     private int id;
 
     @Column(unique = true)
-    @Size(min = 2, message = "Минимум 2 символа")
+    @Size(min = 3, message = "Минимум 3 символа")
     private String username;
     @Size(min = 3, message = "Минимум 3 символа")
     private String password;
