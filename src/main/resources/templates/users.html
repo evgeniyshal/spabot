@@ -19,8 +19,7 @@
             <th scope="col">Фамилия</th>
             <th scope="col">Логин</th>
             <th scope="col">Роль</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -33,11 +32,7 @@
             <td th:if="${user.containsRoleByAuthority('ROLE_USER')}" th:text="'Пользователь'"></td>
             <td>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="btn btn-primary" th:href="@{/users/update(id=${user.id})}">Изменить</a>
-                </div>
-            </td>
-            <td>
-                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="btn btn-success" th:href="@{/users/update(id=${user.id})}">Изменить</a>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#modal-delete'+${user.id}">Удалить</button>
                 </div>

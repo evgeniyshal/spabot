@@ -14,3 +14,12 @@ header {
 .text-success {
     color: green;
 }
+
+table tr td:last-child {
+    white-space: nowrap;
+    width: 1px;
+}
+
+table tr td:last-child {
+    text-align: right;
+}
