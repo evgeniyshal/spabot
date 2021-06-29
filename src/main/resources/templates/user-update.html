@@ -44,7 +44,11 @@
                         th:utext="${'Пользователь'}"></option>
             </select>
         </div>
-        <div><input type="submit" class="btn btn-primary" value="Сохранить"></div>
+        <p th:if="${usernameError}" th:utext="${usernameError}" class="error"></p>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Сохранить">
+            <a class="btn btn-secondary" th:href="@{/}">Отмена</a>
+        </div>
     </form>
 </div>
 </body>

@@ -33,16 +33,15 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public void save(User user, String... authorities){
+    public boolean save(User user, String... authorities){
+        User userFromDb = userRepository.findByUsername(user.getUsername());
+        if (userFromDb != null && userFromDb.getId() != user.getId()){
+            return false;
+        }
         user.setRoles(roleRepository.findByAuthorityIn(Arrays.asList(authorities)));
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
-    }
-
-    public void updateCurrentUser(User user, String... authorities){
-        user.setRoles(roleRepository.findByAuthorityIn(Arrays.asList(authorities)));
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+        return true;
     }
 
     public List<User> findAll() {

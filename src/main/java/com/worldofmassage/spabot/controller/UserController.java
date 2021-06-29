@@ -61,8 +61,11 @@ public class UserController implements WebMvcConfigurer {
             return "user-update";
         }
 
-        userService.updateCurrentUser(user, authorities);
+        if (!userService.save(user, authorities)){
+            model.addAttribute("usernameError", "Пользователь с данным логином уже существует");
+            return "user-update";
+        }
 
-        return "redirect:/profile";
+        return "redirect:/";
     }
 }
