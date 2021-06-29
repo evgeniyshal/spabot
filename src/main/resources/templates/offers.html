@@ -7,7 +7,7 @@
 </head>
 <body>
 <section th:insert="navbar::header"></section>
-<div class="container">
+<div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
     <p><a class="btn btn-outline-secondary btn-lg btn-block" href="/offers/create">Добавить услугу</a></p>
 </div>
 <div class="container">

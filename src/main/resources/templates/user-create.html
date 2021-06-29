@@ -2,13 +2,14 @@
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: head(~{::title})">
-    <title>Изменение профиля</title>
+    <title>Добавление пользователя</title>
 </head>
 <body>
 <section th:insert="navbar::header"></section>
 
 <div class="container">
-    <form method="post" th:action="@{/profile/update}" th:object="${user}">
+    <h3>Добавление пользователя</h3>
+    <form th:fragment="user" method="post" th:action="@{/users/create}" th:object="${user}">
         <input th:field="*{id}" type="hidden" class="form-control" id="id">
         <div class="form-group">
             <label for="username">Введите имя</label>
@@ -47,7 +48,7 @@
         <p th:if="${usernameError}" th:utext="${usernameError}" class="error"></p>
         <div>
             <input type="submit" class="btn btn-primary" value="Сохранить">
-            <a class="btn btn-secondary" th:href="@{/profile/show}">Отмена</a>
+            <a class="btn btn-secondary" th:href="@{/users/show}">Отмена</a>
         </div>
     </form>
 </div>

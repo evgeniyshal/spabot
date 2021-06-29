@@ -44,6 +44,10 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    public void deleteById(int id) {
+        userRepository.deleteById(id);
+    }
+
     public List<User> findAll() {
         return userRepository.findAll();
     }

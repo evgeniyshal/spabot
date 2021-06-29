@@ -7,8 +7,8 @@
 </head>
 <body>
 <section th:insert="navbar::header"></section>
-<div class="container">
-    <p><a class="btn btn-outline-secondary btn-lg btn-block" href="/offers/create">Добавить пользователя</a></p>
+<div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
+    <p><a class="btn btn-outline-secondary btn-lg btn-block" href="/users/create">Добавить пользователя</a></p>
 </div>
 <div class="container">
     <table class="table">
@@ -29,8 +29,8 @@
             <td th:utext="${user.firstName}"></td>
             <td th:utext="${user.lastName}"></td>
             <td th:utext="${user.username}"></td>
-            <td th:if="${user.containsRoleByAuthority('ROLE_ADMIN')}" class="col-sm-9 text-secondary" th:text="'Администратор'"></td>
-            <td th:if="${user.containsRoleByAuthority('ROLE_USER')}" class="col-sm-9 text-secondary" th:text="'Пользователь'"></td>
+            <td th:if="${user.containsRoleByAuthority('ROLE_ADMIN')}" th:text="'Администратор'"></td>
+            <td th:if="${user.containsRoleByAuthority('ROLE_USER')}" th:text="'Пользователь'"></td>
             <td>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-primary" th:href="@{/users/update(id=${user.id})}">Изменить</a>
