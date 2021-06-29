@@ -17,13 +17,13 @@ public class User implements UserDetails {
     private int id;
 
     @Column(unique = true)
-    @Size(min = 3, message = "Минимум 3 символа")
+    @Size(min = 3, max = 10, message = "Минимум 3 символа, максимум 10")
     private String username;
-    @Size(min = 3, message = "Минимум 3 символа")
+    @Size(min = 3, max = 10, message = "Минимум 3 символа, максимум 10")
     private String password;
-    @Size(min = 3, message = "Минимум 3 символа")
+    @Size(min = 3, max = 15, message = "Минимум 3 символа, максимум 15")
     private String firstName;
-    @Size(min = 3, message = "Минимум 3 символа")
+    @Size(min = 3, max = 15, message = "Минимум 3 символа, максимум 15")
     private String lastName;
     @Transient
     private String passwordConfirm;
