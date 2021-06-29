@@ -1,7 +1,6 @@
 package com.worldofmassage.spabot.controller;
 
 import com.worldofmassage.spabot.entity.User;
-import com.worldofmassage.spabot.service.RoleService;
 import com.worldofmassage.spabot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +17,10 @@ import javax.validation.Valid;
 @RequestMapping(value = "/users")
 public class UserController {
   private final UserService userService;
-  private final RoleService roleService;
 
   @Autowired
-  public UserController(UserService userService, RoleService roleService) {
+  public UserController(UserService userService) {
       this.userService = userService;
-      this.roleService = roleService;
     }
 
     @GetMapping(value = "/show")
