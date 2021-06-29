@@ -5,10 +5,13 @@ import com.worldofmassage.spabot.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/offers")
@@ -34,7 +37,11 @@ public class OfferController {
     }
 
     @PostMapping("/create")
-    public String createOffer(Offer offer) {
+    public String createOffer(@Valid Offer offer,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "offer-create";
+        }
         offerRepository.save(offer);
         return "redirect:/offers/show";
     }
@@ -47,7 +54,11 @@ public class OfferController {
     }
 
     @PostMapping("/update")
-    public String updateOffer(Offer offer) {
+    public String updateOffer(@Valid Offer offer,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "offer-update";
+        }
         offerRepository.save(offer);
         return "redirect:/offers/show";
     }

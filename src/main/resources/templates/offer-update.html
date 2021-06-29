@@ -16,18 +16,22 @@
         <div class="form-group">
             <label for="title">Название</label>
             <input th:field="*{title}" type="text" min="3" class="form-control" id="title" placeholder="Введите название">
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></p>
         </div>
         <div class="form-group">
             <label for="description">Описание</label>
             <input th:field="*{description}" type="text" min="3" class="form-control" id="description" placeholder="Введите описание">
+            <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error"></p>
         </div>
         <div class="form-group">
             <label for="duration">Продолжительность сеанса в минутах</label>
             <input th:field="*{duration}" type="number" min="1" class="form-control" id="duration" placeholder="Введите продолжительность сеанса">
+            <p th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></p>
         </div>
         <div class="form-group">
             <label for="price">Цена</label>
             <input th:field="*{price}" type="number" min="1" class="form-control" id="price" placeholder="Введите цену">
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></p>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Изменить</button>
         <a class="btn btn-secondary btn-block" th:href="@{/offers/show}">Отмена</a>
