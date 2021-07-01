@@ -63,7 +63,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.telegram</groupId>
-			<artifactId>telegrambots-spring-boot-starter</artifactId>
+			<artifactId>telegrambots</artifactId>
 			<version>5.2.0</version>
 		</dependency>
 		<dependency>
