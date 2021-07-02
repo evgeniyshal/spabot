@@ -8,4 +8,5 @@ import java.util.List;
 public interface OfferRepository extends CrudRepository<Offer, Integer> {
     List<Offer> findByOrderByIdAsc();
     Offer findById(int id);
+    Offer findByTitle(String title);
 }

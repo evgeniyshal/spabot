@@ -5,17 +5,13 @@ import com.worldofmassage.spabot.entity.User;
 import com.worldofmassage.spabot.service.RoleService;
 import com.worldofmassage.spabot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-@Component
+@Service
 public class InitDB {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     private UserService userService;
     private RoleService roleService;
 
