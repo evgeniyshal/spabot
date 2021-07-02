@@ -19,9 +19,9 @@ public class User implements UserDetails {
     @Column(unique = true)
     @Size(min = 3, max = 10, message = "Минимум 3 символа, максимум 10")
     private String username;
-    @Size(min = 3, max = 10, message = "Минимум 3 символа, максимум 10")
+    @Size(min = 3, message = "Минимум 3 символа")
     private String password;
-    @Size(min = 3, max = 15, message = "Минимум 3 символа, максимум 15")
+    @Size(min = 3, max = 10, message = "Минимум 3 символа, максимум 10")
     private String firstName;
     @Size(min = 3, max = 15, message = "Минимум 3 символа, максимум 15")
     private String lastName;
