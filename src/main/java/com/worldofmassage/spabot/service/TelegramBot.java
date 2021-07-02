@@ -77,9 +77,11 @@ public class TelegramBot extends TelegramLongPollingBot {
                 row.add(title);
                 keyboardRows.add(row);
             }
-            return new ReplyKeyboardMarkup(keyboardRows);
+            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
+            replyKeyboardMarkup.setResizeKeyboard(true);
+            return replyKeyboardMarkup;
         }
-        return new ReplyKeyboardMarkup();
+        return new ReplyKeyboardMarkup(new ArrayList<>());
     }
 
     private String getMessageText(String command) {
