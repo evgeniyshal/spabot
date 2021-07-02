@@ -4,26 +4,29 @@ import com.worldofmassage.spabot.config.bot.BotConfig;
 import com.worldofmassage.spabot.entity.Offer;
 import com.worldofmassage.spabot.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
+@EnableScheduling
 public class TelegramBot extends TelegramLongPollingBot {
 
     private final String botUsername;
     private final String botToken;
     private final OfferRepository offerRepository;
-    private List<Offer> offers;
+    private final Map<String, Offer> offers = new HashMap<>();
 
     @Autowired
     public TelegramBot(BotConfig config, OfferRepository offerRepository) {
@@ -45,7 +48,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-        } else if (offerRepository.findByOrderByIdAsc().stream().anyMatch(offer -> offer.getTitle().equals(command))) {
+        } else if (offers.containsKey(command)) {
             try {
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(update.getMessage().getChatId()));
@@ -69,9 +72,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     private ReplyKeyboardMarkup getKeyboard(String command) {
         if ("/offers".equals(command)) {
             List<KeyboardRow> keyboardRows = new ArrayList<>();
-            for (Offer offer : offerRepository.findByOrderByIdAsc()) {
+            for (String title : offers.keySet()) {
                 KeyboardRow row = new KeyboardRow();
-                row.add(offer.getTitle());
+                row.add(title);
                 keyboardRows.add(row);
             }
             return new ReplyKeyboardMarkup(keyboardRows);
@@ -81,19 +84,24 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String getMessageText(String command) {
         StringBuilder builder = new StringBuilder();
-        Offer offer = offerRepository.findByTitle(command);
+        Offer offer = offers.get(command);
         builder
                 .append(offer.getTitle())
                 .append("\n")
+                .append("\n")
                 .append(offer.getDescription())
                 .append("\n")
+                .append("\n")
+                .append("Стоимость: ")
                 .append(offer.getPrice());
         return builder.toString();
     }
 
-    @Scheduled(fixedRate = 1800000)
+    @Scheduled(fixedRate = 300000)
     private void updateOffers() {
-        offers = offerRepository.findByOrderByIdAsc();
+        for (Offer offer : offerRepository.findByOrderByIdAsc()) {
+            offers.put(offer.getTitle(), offer);
+        }
     }
 
     public String getBotUsername() {
