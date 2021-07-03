@@ -12,22 +12,30 @@
     <form th:fragment="offer" method="post" th:action="@{/offers/create}" th:object="${offer}">
         <div class="form-group">
             <label for="title">Название</label>
-            <input th:field="*{title}" type="text" min="3" class="form-control" th:classappend="${#fields.hasErrors('title')}?  is-invalid" id="title" placeholder="Введите название" required>
+            <input th:field="*{title}" type="text" min="3" class="form-control"
+                   th:classappend="${#fields.hasErrors('title')}?  is-invalid"
+                   id="title" placeholder="Введите название" required>
             <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback" th:errors="*{title}"></div>
         </div>
         <div class="form-group">
             <label for="description">Описание</label>
-            <input th:field="*{description}" type="text" min="3" class="form-control" th:classappend="${#fields.hasErrors('description')}?  is-invalid" id="description" placeholder="Введите описание" required>
+            <input th:field="*{description}" type="text" min="3" class="form-control"
+                   th:classappend="${#fields.hasErrors('description')}?  is-invalid"
+                   id="description" placeholder="Введите описание" required>
             <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback" th:errors="*{description}"></div>
         </div>
         <div class="form-group">
             <label for="duration">Продолжительность сеанса в минутах</label>
-            <input th:field="*{duration}" type="number" min="1" class="form-control" th:classappend="${#fields.hasErrors('duration')}?  is-invalid" id="duration" placeholder="Введите продолжительность сеанса">
+            <input th:field="*{duration}" type="number" min="1" class="form-control"
+                   th:classappend="${#fields.hasErrors('duration')}?  is-invalid"
+                   id="duration" placeholder="Введите продолжительность сеанса">
             <div th:if="${#fields.hasErrors('duration')}" class="invalid-feedback" th:errors="*{duration}"></div>
         </div>
         <div class="form-group">
             <label for="price">Цена</label>
-            <input th:field="*{price}" type="number" min="1" class="form-control" th:classappend="${#fields.hasErrors('price')}?  is-invalid" id="price" placeholder="Введите цену">
+            <input th:field="*{price}" type="number" min="1" class="form-control"
+                   th:classappend="${#fields.hasErrors('price')}?  is-invalid"
+                   id="price" placeholder="Введите цену">
             <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback" th:errors="*{price}"></div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Добавить</button>

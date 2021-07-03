@@ -34,10 +34,12 @@
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-success" th:href="@{/users/update(id=${user.id})}">Изменить</a>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#modal-delete'+${user.id}">Удалить</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                            th:attr="data-target='#modal-delete'+${user.id}">Удалить</button>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true" th:id="modal-delete+${user.id}">
+                <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="deleteModalCenterTitle" aria-hidden="true" th:id="modal-delete+${user.id}">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

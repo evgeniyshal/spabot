@@ -43,9 +43,11 @@
                     <div class="col-sm-3">
                         <h6 class="mb-0">Роль</h6>
                     </div>
-                    <div th:if="${user.containsRoleByAuthority('ROLE_ADMIN')}" class="col-sm-9 text-secondary" th:text="'Администратор'">
+                    <div th:if="${user.containsRoleByAuthority('ROLE_ADMIN')}" class="col-sm-9 text-secondary"
+                         th:text="'Администратор'">
                     </div>
-                    <div th:if="${user.containsRoleByAuthority('ROLE_USER')}" class="col-sm-9 text-secondary" th:text="'Пользователь'">
+                    <div th:if="${user.containsRoleByAuthority('ROLE_USER')}" class="col-sm-9 text-secondary"
+                         th:text="'Пользователь'">
                     </div>
                 </div>
                 <hr>
