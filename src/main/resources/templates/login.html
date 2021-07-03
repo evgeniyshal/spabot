@@ -10,8 +10,12 @@
 
 <div class="container">
     <h3>Авторизация</h3>
-    <p th:if="${error}" class="error">Неправильный логин или пароль</p>
-    <p th:if="${logout}" class="text-success">Вы успешно вышли из системы</p>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        Неправильный логин или пароль
+    </div>
+    <div th:if="${logout}" class="alert alert-success" role="alert">
+        Вы успешно вышли из системы
+    </div>
     <form method="post" th:action="@{/login}" >
         <div class="form-group">
             <label for="username">Введите логин</label>
